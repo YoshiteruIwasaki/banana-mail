@@ -17,11 +17,11 @@
   </div>
   <div class="field">
     <%= f.label :zip %><br>
-    <%= f.text_field :zip %>
+    <%= f.text_field :zip, "onKeyUp" => "AjaxZip3.zip2addr(this,'','inquiry[prefecture]','inquiry[address1]')" %>
   </div>
   <div class="field">
     <%= f.label :prefecture %><br>
-    <%= f.number_field :prefecture %>
+    <%= f.collection_select :prefecture, JpPrefecture::Prefecture.all, :code, :name %>
   </div>
   <div class="field">
     <%= f.label :address1 %><br>
