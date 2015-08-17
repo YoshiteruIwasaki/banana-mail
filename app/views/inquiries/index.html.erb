@@ -1,24 +1,26 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listing Inquiries</h1>
-
-<table>
+<%- model_class = Inquiry -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Zip</th>
-      <th>Prefecture</th>
-      <th>Address1</th>
-      <th>Address2</th>
-      <th>Email</th>
-      <th>Content</th>
-      <th colspan="3"></th>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:zip) %></th>
+      <th><%= model_class.human_attribute_name(:prefecture) %></th>
+      <th><%= model_class.human_attribute_name(:address1) %></th>
+      <th><%= model_class.human_attribute_name(:address2) %></th>
+      <th><%= model_class.human_attribute_name(:email) %></th>
+      <th><%= model_class.human_attribute_name(:content) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
-
   <tbody>
     <% @inquiries.each do |inquiry| %>
       <tr>
+        <td><%= link_to inquiry.id, inquiry_path(inquiry) %></td>
         <td><%= inquiry.name %></td>
         <td><%= inquiry.zip %></td>
         <td><%= inquiry.prefecture %></td>
@@ -26,14 +28,21 @@
         <td><%= inquiry.address2 %></td>
         <td><%= inquiry.email %></td>
         <td><%= inquiry.content %></td>
-        <td><%= link_to 'Show', inquiry %></td>
-        <td><%= link_to 'Edit', edit_inquiry_path(inquiry) %></td>
-        <td><%= link_to 'Destroy', inquiry, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%=l inquiry.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_inquiry_path(inquiry), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      inquiry_path(inquiry),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-danger' %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Inquiry', new_inquiry_path %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_inquiry_path,
+            :class => 'btn btn-primary' %>
