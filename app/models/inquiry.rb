@@ -7,4 +7,12 @@ class Inquiry < ActiveRecord::Base
   validates :address1, presence:true,length: { maximum: 250 }
   validates :email, presence:true,email: true, length: { maximum: 250 }
   validates :content, presence: true, length: { maximum: 10000 }
+
+  validates_acceptance_of :confirm
+  after_validation :check_confirm
+
+  def check_confirm
+    errors.delete(:confirm)
+    self.confirm = errors.empty? ? '1' : ''
+  end
 end

@@ -70,6 +70,6 @@ class InquiriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def inquiry_params
-      params.require(:inquiry).permit(:name, :zip, :prefecture, :address1, :address2, :email, :content)
+      params.require(:inquiry).permit(:name, :zip, :prefecture, :address1, :address2, :email, :content, :confirm)
     end
 end

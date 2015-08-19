@@ -156,6 +156,7 @@ ja:
       create: 登録する
       submit: 保存する
       update: 更新する
+      confirm: 確認する
   number:
     currency:
       format:

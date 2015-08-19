@@ -3,7 +3,7 @@
     <% if @inquiry.errors.any? %>
     <div id="error_expl" class="panel panel-danger">
       <div class="panel-heading">
-        <h3 class="panel-title"><%= pluralize(@inquiry.errors.count, "error") %> prohibited this inquiry from being saved:</h3>
+        <h3 class="panel-title"><%= pluralize(@inquiry.errors.count, "error") %></h3>
       </div>
       <div class="panel-body">
         <ul>
@@ -15,59 +15,98 @@
     </div>
   <% end %>
 
+  <%= f.hidden_field :confirm %>
+
   <div class="control-group">
     <%= f.label :name, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :name, :class => 'form-control' %>
+    	 <% if @inquiry.confirm.blank? %>
+    	   <%= f.text_field :name, :class => 'form-control' %>
+    	 <% else %>
+    	   <%= @inquiry[:name] %>
+    	   <%= f.hidden_field :name %>
+    	 <% end %>
     </div>
     <%= error_span(@inquiry[:name]) %>
   </div>
   <div class="control-group">
     <%= f.label :zip, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :zip, :class => 'form-control' ,"onKeyUp" => "AjaxZip3.zip2addr(this,'','inquiry[prefecture]','inquiry[address1]')" %>
+    	 <% if @inquiry.confirm.blank? %>
+           <%= f.text_field :zip, :class => 'form-control' ,"onKeyUp" => "AjaxZip3.zip2addr(this,'','inquiry[prefecture]','inquiry[address1]')" %>
+    	 <% else %>
+    	   <%= @inquiry[:zip] %>
+    	   <%= f.hidden_field :zip %>
+    	 <% end %>
     </div>
     <%= error_span(@inquiry[:zip]) %>
   </div>
   <div class="control-group">
     <%= f.label :prefecture, :class => 'control-label' %>
     <div class="controls">
-    <%= f.collection_select :prefecture,  JpPrefecture::Prefecture.all, :code, :name %>
+    	 <% if @inquiry.confirm.blank? %>
+    	   <%= f.collection_select :prefecture,  JpPrefecture::Prefecture.all, :code, :name %>
+    	 <% else %>
+    	   <%= @inquiry[:prefecture] %>
+    	   <%= f.hidden_field :prefecture %>
+    	 <% end %>
     </div>
     <%= error_span(@inquiry[:prefecture]) %>
   </div>
   <div class="control-group">
     <%= f.label :address1, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :address1, :class => 'form-control' %>
+    	 <% if @inquiry.confirm.blank? %>
+    	   <%= f.text_field :address1, :class => 'form-control' %>
+    	 <% else %>
+    	   <%= @inquiry[:address1] %>
+    	   <%= f.hidden_field :address1 %>
+    	 <% end %>
     </div>
     <%= error_span(@inquiry[:address1]) %>
   </div>
   <div class="control-group">
     <%= f.label :address2, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :address2, :class => 'form-control' %>
+    	 <% if @inquiry.confirm.blank? %>
+    	   <%= f.text_field :address2, :class => 'form-control' %>
+    	 <% else %>
+    	   <%= @inquiry[:address2] %>
+    	   <%= f.hidden_field :address2 %>
+    	 <% end %>
     </div>
     <%= error_span(@inquiry[:address2]) %>
   </div>
   <div class="control-group">
     <%= f.label :email, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :email, :class => 'form-control' %>
+    	 <% if @inquiry.confirm.blank? %>
+    	   <%= f.text_field :email, :class => 'form-control' %>
+    	 <% else %>
+    	   <%= @inquiry[:email] %>
+    	   <%= f.hidden_field :email %>
+    	 <% end %>
     </div>
     <%= error_span(@inquiry[:email]) %>
   </div>
   <div class="control-group">
     <%= f.label :content, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :content, :class => 'form-control' %>
+    	 <% if @inquiry.confirm.blank? %>
+    	   <%= f.text_field :content, :class => 'form-control' %>
+    	 <% else %>
+    	   <%= @inquiry[:content] %>
+    	   <%= f.hidden_field :content %>
+    	 <% end %>
     </div>
     <%= error_span(@inquiry[:content]) %>
   </div>
 
-
-  <%= f.submit nil, :class => 'btn btn-primary' %>
-  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+  <% if @inquiry.confirm.blank? %>
+    <%= f.submit t('helpers.submit.confirm'), :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
             inquiries_path, :class => 'btn btn-default' %>
-
+  <% else %>
+    <%= f.submit t('helpers.submit.create'), :class => 'btn btn-primary' %>
+  <% end %>
 <% end %>
