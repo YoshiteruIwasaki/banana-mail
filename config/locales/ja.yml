@@ -144,6 +144,7 @@ ja:
       wrong_length: は%{count}文字で入力してください
       other_than: は%{count}以外の値にしてください
       invalid_email: "は正しい%{attribute}ではありません"
+      has_errors: "つのエラーがあります"
     template:
       body: 次の項目を確認してください
       header:
@@ -157,6 +158,7 @@ ja:
       submit: 保存する
       update: 更新する
       confirm: 確認する
+      full_confirm: 入力内容を確認する
   number:
     currency:
       format:
@@ -226,8 +228,15 @@ ja:
         address1: 住所
         address2: マンション・アパート名
         email: メールアドレス
-        content: お問い合せ内容
+        content: お問い合わせ内容
   views:
     inquiries:
       title: お問い合わせ
+      create_message_html: お問合せ内容の確認後、担当者よりご連絡させていただきます。<br />各項目を入力していただき、入力が終わりましたら入力内容の確認ボタンを押してください。
+      confirm_message_html: 以下の入力内容をご確認の上、間違いがなければ「送信する」ボタンを押してください。<br />内容を訂正する場合は「戻る」ボタンで前のページへお戻りください。
+      placeholder:
+        name: 山田 太郎
+        prefecture: 都道府県を選んでください
+        address1: 東京都千代田区
+        content: お問い合わせ内容を入力してください
 
