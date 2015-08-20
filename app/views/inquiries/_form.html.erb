@@ -4,7 +4,7 @@
   <p><%= t("views.inquiries.confirm_message_html") %></p>
 <% end %>
 
-    <%= form_for @inquiry, :html => { :class => "form-horizontal inquiry" } do |f| %>
+    <%= form_for @inquiry, :html => { :class => "form-horizontal inquiry", :name =>"inquiryForm" } do |f| %>
 
     <% if @inquiry.errors.any? %>
     <div id="error_expl" class="panel panel-danger">
@@ -111,12 +111,19 @@
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
   <% if @inquiry.confirm.blank? %>
-    <%= f.submit t('helpers.submit.full_confirm'), :class => 'btn btn-primary' %>
+    <%= f.submit t('helpers.submit.full_confirm'), :class => 'btn btn-primary', :disable_with=>t('helpers.submit.indicator') %>
   <% else %>
-    <%= f.submit t('helpers.submit.create'), :class => 'btn btn-primary' %>
-    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-            inquiries_path, :class => 'btn btn-default' %>
+    <%= f.submit t('helpers.submit.create'), :class => 'btn btn-primary', :disable_with => t('helpers.submit.indicator') %>
+    <%= f.submit t('helpers.submit.back'),  :class => 'btn btn-default', :name=>'back',"onclick" => "back()" %>
   <% end %>
     </div>
   </div>
 <% end %>
+
+<script type="text/javascript">
+<!--
+function back(){
+	document.inquiryForm.inquiry[confirm].value="";
+}
+// -->
+</script>

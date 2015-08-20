@@ -158,6 +158,8 @@ ja:
       submit: 保存する
       update: 更新する
       confirm: 確認する
+      back: 戻る
+      indicator: 送信中...
       full_confirm: 入力内容を確認する
   number:
     currency:
