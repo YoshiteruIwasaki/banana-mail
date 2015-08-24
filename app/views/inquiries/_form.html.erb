@@ -114,7 +114,7 @@
     <%= f.submit t('helpers.submit.full_confirm'), :class => 'btn btn-primary', :disable_with=>t('helpers.submit.indicator') %>
   <% else %>
     <%= f.submit t('helpers.submit.create'), :class => 'btn btn-primary', :disable_with => t('helpers.submit.indicator') %>
-    <%= f.submit t('helpers.submit.back'),  :class => 'btn btn-default', :name=>'back',"onclick" => "back()" %>
+    <%= f.submit t('helpers.submit.back'),  :class => 'btn btn-default', :name=>'back',"onclick" => "back_form();" %>
   <% end %>
     </div>
   </div>
@@ -122,8 +122,11 @@
 
 <script type="text/javascript">
 <!--
-function back(){
-	document.inquiryForm.inquiry[confirm].value="";
+function back_form(){
+	console.log("aaa");
+	document.inquiryForm.elements["inquiry[confirm]"].value = "";
+	console.log(document.inquiryForm.elements["inquiry[confirm]"].value);
+
 }
 // -->
 </script>

@@ -27,7 +27,10 @@ class InquiriesController < ApplicationController
     @inquiry = Inquiry.new(inquiry_params)
 
     respond_to do |format|
-      if @inquiry.save
+      if params[:back]
+        format.html { render :new }
+        format.json { render json: @inquiry.errors, status: :unprocessable_entity }
+      elsif @inquiry.save
         InquiryMailer.inquiry_email(@inquiry).deliver
         format.html { redirect_to @inquiry, notice: 'Inquiry was successfully created.' }
         format.json { render :show, status: :created, location: @inquiry }
@@ -70,6 +73,6 @@ class InquiriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def inquiry_params
-      params.require(:inquiry).permit(:name, :zip, :prefecture, :address1, :address2, :email, :content, :confirm)
+      params.require(:inquiry).permit(:name, :zip, :prefecture, :address1, :address2, :email, :content, :confirm, :back)
     end
 end
