@@ -1,4 +1,8 @@
 class Inquiry < ActiveRecord::Base
+
+  include JpPrefecture
+  jp_prefecture :prefecture, method_name: :pref
+
   validates :name, presence: true,length: { maximum: 100 }
   validates :zip, length: { is: 7 }
   validates :prefecture, numericality: {

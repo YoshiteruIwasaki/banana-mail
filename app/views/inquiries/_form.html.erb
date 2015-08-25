@@ -53,7 +53,7 @@
     	 <% if @inquiry.confirm.blank? %>
     	   <%= f.collection_select :prefecture,  JpPrefecture::Prefecture.all, :code, :name, {prompt: t("views.inquiries.placeholder.prefecture")}, {class: "form-control"} %>
     	 <% else %>
-    	   <p class="form-control-static"><%= @inquiry[:prefecture] %></p>
+    	   <p class="form-control-static"><%= JpPrefecture::Prefecture.find(@inquiry[:prefecture]).name %></p>
     	   <%= f.hidden_field :prefecture %>
     	 <% end %>
     </div>
@@ -101,7 +101,7 @@
     	 <% if @inquiry.confirm.blank? %>
     	   <%= f.text_area :content, :class => 'form-control', :size => "20x10",:placeholder => t("views.inquiries.placeholder.content") %>
     	 <% else %>
-    	   <p class="form-control-static"><%= @inquiry[:content] %></p>
+    	   <p class="form-control-static"><%= simple_format(h(@inquiry[:content])) %></p>
     	   <%= f.hidden_field :content %>
     	 <% end %>
     </div>
